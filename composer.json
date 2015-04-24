@@ -1,6 +1,7 @@
 {
     "name": "parsidev/azinsms",
-    "description": "",
+    "description": "package for send sms with laravel5 (published for smsazin.com)",
+    "license": "MIT",
     "authors": [
         {
             "name": "Mohammad Reza",
