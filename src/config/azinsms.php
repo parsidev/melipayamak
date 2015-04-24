@@ -1,8 +1,8 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+return [
+    'webserviceUrl' => 'http://www.azinpanel.ir/class/sms/webservice3/server.php?wsdl',
+    'Username' => '*****',
+    'Password' => '*********',
+    'fromNumber' => '+98*********',
+];

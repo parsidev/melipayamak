@@ -9,5 +9,4 @@ class Azinsms extends Facade {
     protected static function getFacadeAccessor() {
         return 'azinsms';
     }
-
 }
