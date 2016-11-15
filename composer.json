@@ -1,6 +1,6 @@
 {
-    "name": "parsidev/azinsms",
-    "description": "package for send sms with laravel5 (published for smsazin.com)",
+    "name": "parsidev/melipayamak",
+    "description": "package for send sms with laravel5.1 (published for melipayamak.com)",
     "license": "MIT",
     "authors": [
         {
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Parsidev\\Azinsms": "src/"
+            "Parsidev\\MeliPayamak": "src/"
         }
     },
     "minimum-stability": "stable"

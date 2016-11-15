@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'webserviceUrl' => 'http://www.azinpanel.ir/class/sms/webservice3/server.php?wsdl',
+    'webserviceUrl' => 'http://api.payamak-panel.com/post/Send.asmx?wsdl',
     'Username' => '*****',
     'Password' => '*********',
     'fromNumber' => '+98*********',

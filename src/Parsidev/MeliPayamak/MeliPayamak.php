@@ -1,8 +1,8 @@
 <?php
 
-namespace Parsidev\Azinsms;
+namespace Parsidev\MeliPayamak;
 
-class Azinsms {
+class MeliPayamak {
 
     protected $confg;
     protected $client;

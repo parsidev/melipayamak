@@ -1,12 +1,12 @@
 <?php
 
-namespace Parsidev\Azinsms\Facades;
+namespace Parsidev\MeliPayamak\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Azinsms extends Facade {
+class MeliPayamak extends Facade {
 
     protected static function getFacadeAccessor() {
-        return 'azinsms';
+        return 'melipayamak';
     }
 }
