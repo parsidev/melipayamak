@@ -7,7 +7,7 @@ use SoapClient;
 
 class MeliPayamakServiceProvider extends ServiceProvider {
 
-    protected $defer = false;
+    protected $defer = true;
 
     public function boot() {
         $this->publishes([
@@ -16,7 +16,7 @@ class MeliPayamakServiceProvider extends ServiceProvider {
     }
 
     public function register() {
-        $this->app['melipayamak'] = $this->app->singleton(MeliPayamak::class, function($app) {
+        $this->app->singleton('melipayamak', function($app) {
             $config = config('melipayamak');
             return new MeliPayamak($config, new SoapClient($config['webserviceUrl'], ['encoding' => 'UTF-8']));
         });
