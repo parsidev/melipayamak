@@ -1,6 +1,6 @@
 {
     "name": "parsidev/melipayamak",
-    "description": "package for send sms with laravel5.1 (published for melipayamak.com)",
+    "description": "package for send sms with laravel5.4 (published for melipayamak.com)",
     "license": "MIT",
     "authors": [
         {
@@ -9,8 +9,8 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "illuminate/support": "5.1.*"
+        "php": ">=5.6.4",
+        "illuminate/support": "5.4.*"
     },
     "autoload": {
         "psr-0": {

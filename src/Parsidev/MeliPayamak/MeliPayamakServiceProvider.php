@@ -16,7 +16,7 @@ class MeliPayamakServiceProvider extends ServiceProvider {
     }
 
     public function register() {
-        $this->app['melipayamak'] = $this->app->share(function($app) {
+        $this->app['melipayamak'] = $this->app->singleton(MeliPayamak::class, function($app) {
             $config = config('melipayamak');
             return new MeliPayamak($config, new SoapClient($config['webserviceUrl'], ['encoding' => 'UTF-8']));
         });
