@@ -3,11 +3,10 @@
 namespace Parsidev\MeliPayamak;
 
 use Illuminate\Support\ServiceProvider;
-use SoapClient;
 
 class MeliPayamakServiceProvider extends ServiceProvider {
 
-    protected $defer = false;
+    protected $defer = true;
 
     public function boot() {
         $this->publishes([
@@ -16,9 +15,9 @@ class MeliPayamakServiceProvider extends ServiceProvider {
     }
 
     public function register() {
-        $this->app['melipayamak'] = $this->app->share(function($app) {
+        $this->app->singleton('melipayamak', function($app) {
             $config = config('melipayamak');
-            return new MeliPayamak($config, new SoapClient($config['webserviceUrl'], ['encoding' => 'UTF-8']));
+            return new MeliPayamak($config);
         });
     }
 
