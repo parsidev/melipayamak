@@ -1,7 +1,7 @@
 laravelSms
 ==========
 
-package for send sms with laravel5.1 (published for [melipayamak.com](http://melipayamak.com)) this package only work for iranian mobile operator
+package for send sms with laravel5.5 (published for [melipayamak.com](http://melipayamak.com)) this package only work for iranian mobile operator
 
 installation
 ------------
@@ -9,20 +9,12 @@ For install this package Edit your project's ```composer.json``` file to require
 
 ```php
 "require": {
-    "parsidev/melipayamak": "dev-master"
+    "parsidev/melipayamak": "5.5.x-dev"
 },
 ```
 Now, update Composer:
 ```
 composer update
-```
-Once composer is finished, you need to add the service provider. Open ```config/app.php```, and add a new item to the providers array.
-```
-'Parsidev\MeliPayamak\MeliPayamakServiceProvider',
-```
-Next, add a Facade for more convenient usage. In ```config/app.php``` add the following line to the aliases array:
-```
-'MeliPayamak' => 'Parsidev\MeliPayamak\Facades\MeliPayamak',
 ```
 Publish config files:
 ```
