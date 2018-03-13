@@ -1,7 +1,7 @@
 laravelSms
 ==========
 
-package for send sms with laravel5.5 (published for [melipayamak.com](http://melipayamak.com)) this package only work for iranian mobile operator
+package for send sms with laravel5.6 (published for [melipayamak.com](http://melipayamak.com)) this package only work for iranian mobile operator
 
 installation
 ------------
@@ -9,7 +9,7 @@ For install this package Edit your project's ```composer.json``` file to require
 
 ```php
 "require": {
-    "parsidev/melipayamak": "5.5.x-dev"
+    "parsidev/melipayamak": "5.6.x-dev"
 },
 ```
 Now, update Composer:
