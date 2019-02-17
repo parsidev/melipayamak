@@ -69,7 +69,7 @@ class MeliPayamak
         $parameters['password'] = $this->confg['Password'];
         $parameters['to'] = $to;
         
-        if(!is_null($from))
+        if(is_null($from))
             $parameters['from'] = $this->confg['fromNumber'];
         else
             $parameters['from'] = $from;
