@@ -60,7 +60,7 @@ class MeliPayamak
         $response = $this->client->GetDelivery2($parameters)->GetDeliveryResult;
         return $response;
     }
-    public function sendSMS($to, $message, $type = 'normal')
+    public function sendSMS($to, $message, $from = null, $type = 'normal')
     {
         $this->connectForSend();
         if (!is_array($to))
