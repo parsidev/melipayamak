@@ -68,12 +68,16 @@ class MeliPayamak
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
         $parameters['to'] = $to;
-        $parameters['from'] = $this->confg['fromNumber'];
+        
+        if(!is_null($from))
+            $parameters['from'] = $this->confg['fromNumber'];
+        else
+            $parameters['from'] = $from;
+        
         $parameters['text'] = $message;
-        if ($type == 'normal')
-            $parameters['isflash'] = false;
-        elseif ($type == 'flash')
-            $parameters['isflash'] = true;
+
+        $parameters['isflash'] = $type == 'flash';
+        
         $response = $this->client->SendSimpleSMS($parameters)->SendSimpleSMSResult;
         foreach ($response as $v) {
             $response = $v;
