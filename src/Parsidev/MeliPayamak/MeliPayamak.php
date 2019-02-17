@@ -79,9 +79,7 @@ class MeliPayamak
         $parameters['isflash'] = $type == 'flash';
         
         $response = $this->client->SendSimpleSMS($parameters)->SendSimpleSMSResult;
-        foreach ($response as $v) {
-            $response = $v;
-        }
+       
         return $response;
     }
     public function getCredit()
