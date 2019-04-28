@@ -14,8 +14,11 @@ class MeliPayamak
 
     private function responseGenerator($response)
     {
+        $code = intval($response->string);
         $result = [];
-        $result['status'] = intval($response->string);
+        $result['status'] = $code;
+        $result['sent'] = $code > 100;
+        $result['deliver'] = $this->getStatuses($code)->int == 1;
 
         switch ($result['status']) {
             case 0:
