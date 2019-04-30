@@ -18,7 +18,10 @@ class MeliPayamak
         $result = [];
         $result['status'] = $code;
         $result['sent'] = $code > 100;
-        $result['deliver'] = $this->getStatuses($code)->int == 1;
+        if($code > 100)
+            $result['deliver'] = $this->getStatuses($code)->int == 1;
+        else
+           $result['deliver'] = false; 
 
         switch ($result['status']) {
             case 0:
