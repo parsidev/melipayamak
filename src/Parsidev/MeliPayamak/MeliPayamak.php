@@ -1,7 +1,7 @@
 <?php
 
 namespace Parsidev\MeliPayamak;
-
+ini_set('default_socket_timeout', 120);
 class MeliPayamak
 {
     protected $confg;
