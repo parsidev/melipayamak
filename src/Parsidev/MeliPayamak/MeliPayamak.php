@@ -1,17 +1,14 @@
 <?php
-
 namespace Parsidev\MeliPayamak;
 ini_set('default_socket_timeout', 5000);
 class MeliPayamak
 {
     protected $confg;
     protected $client;
-
     public function __construct($config)
     {
         $this->confg = $config;
     }
-
     private function responseGenerator($response)
     {
         $code = intval($response->string);
@@ -22,7 +19,6 @@ class MeliPayamak
             $result['deliver'] = $this->getStatuses($code)->int == 1;
         else
            $result['deliver'] = false; 
-
         switch ($result['status']) {
             case 0:
                 $result['message'] = "نام کاربری یا رمز عبور اشتباه می‌باشد.";
@@ -66,90 +62,34 @@ class MeliPayamak
         }
         return $result;
     }
-
     //Connect Start
     public function connectForSend($timeout)
     {
-        $this->client = new Soap($this->confg['SendUrl'], [
-            'trace' =>true,
-            'connection_timeout' => 5000,
-            'cache_wsdl' => WSDL_CACHE_NONE,
-            'keep_alive' => false,
-            'encoding' => 'UTF-8',
-            'timeout' => $timeout
-        ]);
+        $this->client = new Soap($this->confg['SendUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
     }
-
     public function connectForContact($timeout)
     {
-        $this->client = new Soap($this->confg['ContactUrl'], [
-            'trace' =>true,
-            'connection_timeout' => 5000,
-            'cache_wsdl' => WSDL_CACHE_NONE,
-            'keep_alive' => false,
-            'encoding' => 'UTF-8',
-            'timeout' => $timeout
-        ]);
+        $this->client = new Soap($this->confg['ContactUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
     }
-
     public function connectForReceive($timeout)
     {
-        $this->client = new Soap($this->confg['ReceiveUrl'], [
-            'trace' =>true,
-            'connection_timeout' => 5000,
-            'cache_wsdl' => WSDL_CACHE_NONE,
-            'keep_alive' => false,
-            'encoding' => 'UTF-8',
-            'timeout' => $timeout
-        ]);
+        $this->client = new Soap($this->confg['ReceiveUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
     }
-
     public function connectForTicket($timeout)
     {
-        $this->client = new Soap($this->confg['TicketUrl'], [
-            'trace' =>true,
-            'connection_timeout' => 5000,
-            'cache_wsdl' => WSDL_CACHE_NONE,
-            'keep_alive' => false,
-            'encoding' => 'UTF-8',
-            'timeout' => $timeout
-        ]);
+        $this->client = new Soap($this->confg['TicketUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
     }
-
     public function connectForUser($timeout)
     {
-        $this->client = new Soap($this->confg['UserUrl'], [
-            'trace' =>true,
-            'connection_timeout' => 5000,
-            'cache_wsdl' => WSDL_CACHE_NONE,
-            'keep_alive' => false,
-            'encoding' => 'UTF-8',
-            'timeout' => $timeout
-        ]);
+        $this->client = new Soap($this->confg['UserUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
     }
-
     public function connectForSchedule($timeout)
     {
-        $this->client = new Soap($this->confg['ScheduleUrl'], [
-            'trace' =>true,
-            'connection_timeout' => 5000,
-            'cache_wsdl' => WSDL_CACHE_NONE,
-            'keep_alive' => false,
-            'encoding' => 'UTF-8',
-            'timeout' => $timeout
-        ]);
+        $this->client = new Soap($this->confg['ScheduleUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
     }
-
     public function connectForRegional($timeout)
     {
-        $this->client = new Soap($this->confg['RegionalUrl'], [
-            'trace' =>true,
-            'connection_timeout' => 5000,
-            'cache_wsdl' => WSDL_CACHE_NONE,
-            'keep_alive' => false,
-            'encoding' => 'UTF-8',
-            'timeout' => $timeout
-        ]);
+        $this->client = new Soap($this->confg['RegionalUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
     }
     //Connect End
     //Send Start
@@ -167,9 +107,7 @@ class MeliPayamak
         }catch (Exception $exception){
             return false;
         }
-
     }
-
     public function getStatus($uniqueId, $timeout = 0)
     {
         $this->connectForSend($timeout);
@@ -183,7 +121,6 @@ class MeliPayamak
             return false;
         }
     }
-
     public function sendSMS($to, $message, $from = null, $type = 'normal', $timeout = 0)
     {
         $this->connectForSend($timeout);
@@ -192,17 +129,12 @@ class MeliPayamak
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
         $parameters['to'] = $to;
-
         if (is_null($from))
             $parameters['from'] = $this->confg['fromNumber'];
         else
             $parameters['from'] = $from;
-
         $parameters['text'] = $message;
-
         $parameters['isflash'] = $type == 'flash';
-
-
         try{
             $response = $this->client->SendSimpleSMS($parameters)->SendSimpleSMSResult;
             return $this->responseGenerator($response);
@@ -210,13 +142,11 @@ class MeliPayamak
             return false;
         }
     }
-
     public function getCredit($timeout = 0)
     {
         $this->connectForSend($timeout);
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
-
         try{
             $response = $this->client->GetCredit($parameters)->GetCreditResult;
             return $response;
@@ -234,7 +164,6 @@ class MeliPayamak
         $parameters['groupName'] = $groupName;
         $parameters['Descriptions'] = $description;
         $parameters['showToChilds'] = $showToChilds;
-
         try{
             $response = $this->client->AddGroup($parameters)->AddGroupResult;
             return $response;
@@ -242,7 +171,6 @@ class MeliPayamak
             return false;
         }
     }
-
     public function addContact($groupId, $firstName, $lastName, $nickName, $corporation, $cellPhone, $phone, $fax,
                                $birthDate, $email, $gender, $province, $city, $address, $postalCode, $additionDate,
                                $additionText, $descriptions, $timeout = 0)
@@ -268,7 +196,6 @@ class MeliPayamak
         $parameters['additionaldate'] = $additionDate;
         $parameters['additionaltext'] = $additionText;
         $parameters['descriptions'] = $descriptions;
-
         try{
             $response = $this->client->AddContact($parameters)->AddContactResult;
             return $response;
@@ -276,14 +203,12 @@ class MeliPayamak
             return false;
         }
     }
-
     public function checkMobileExistInContact($mobileNumber, $timeout = 0)
     {
         $this->connectForContact($timeout);
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
         $parameters['mobileNumber'] = $mobileNumber;
-
         try{
             $response = $this->client->CheckMobileExistInContact($parameters)->CheckMobileExistInContactResult;
             return $response;
@@ -291,7 +216,6 @@ class MeliPayamak
             return false;
         }
     }
-
     public function getContacts($groupId, $keyword, $from, $count, $timeout = 0)
     {
         $this->connectForContact($timeout);
@@ -308,13 +232,11 @@ class MeliPayamak
             return false;
         }
     }
-
     public function getGroups($timeout = 0)
     {
         $this->connectForContact($timeout);
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
-
         try{
             $response = $this->client->GetGroups($parameters)->GetGroupsResult;
             return $response;
@@ -322,7 +244,6 @@ class MeliPayamak
             return false;
         }
     }
-
     public function changeContact($contactId, $mobileNumber, $firstName, $lastName, $nickName, $corporation, $phone,
                                   $fax, $email, $gender, $province, $city, $address, $postalCode, $additionText,
                                   $descriptions, $contactState, $timeout = 0)
@@ -347,7 +268,6 @@ class MeliPayamak
         $parameters['additionaltext'] = $additionText;
         $parameters['descriptions'] = $descriptions;
         $parameters['contactStatus'] = $contactState;
-
         try{
             $response = $this->client->ChangeContact($parameters)->ChangeContactResult;
             return $response;
@@ -355,14 +275,12 @@ class MeliPayamak
             return false;
         }
     }
-
     public function removeContact($mobileNumber, $timeout = 0)
     {
         $this->connectForContact($timeout);
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
         $parameters['mobilenumber'] = $mobileNumber;
-
         try{
             $response = $this->client->RemoveContact($parameters)->RemoveContactResult;
             return $response;
@@ -370,14 +288,12 @@ class MeliPayamak
             return false;
         }
     }
-
     public function getContactEvents($contactId, $timeout = 0)
     {
         $this->connectForContact($timeout);
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
         $parameters['contactId'] = $contactId;
-
         try{
             $response = $this->client->GetContactEvents($parameters)->GetContactEventsResult;
             return $response;
@@ -393,7 +309,6 @@ class MeliPayamak
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
         $parameters['isRead'] = $isRead;
-
         try{
             $response = $this->client->GetInboxCount($parameters)->GetInboxCountResult;
             return $response;
@@ -401,13 +316,11 @@ class MeliPayamak
             return false;
         }
     }
-
     public function getOutBoxCount($timeout = 0)
     {
         $this->connectForReceive($timeout);
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
-
         try{
             $response = $this->client->GetOutBoxCount($parameters)->GetOutBoxCountResult;
             return $response;
@@ -415,7 +328,6 @@ class MeliPayamak
             return false;
         }
     }
-
     public function getMessages($location, $from, $index, $count, $timeout = 0)
     {
         $this->connectForReceive($timeout);
@@ -425,7 +337,6 @@ class MeliPayamak
         $parameters['from'] = $from;
         $parameters['index'] = $index;
         $parameters['count'] = $count;
-
         try{
             $response = $this->client->GetMessages($parameters)->GetMessagesResult;
             return $response;
@@ -433,7 +344,6 @@ class MeliPayamak
             return false;
         }
     }
-
     public function getMessagesStr($location, $from, $index, $count, $timeout = 0)
     {
         $this->connectForReceive($timeout);
@@ -443,7 +353,6 @@ class MeliPayamak
         $parameters['from'] = $from;
         $parameters['index'] = $index;
         $parameters['count'] = $count;
-
         try{
             $response = $this->client->GetMessageStr($parameters)->GetMessageStrResult;
             return $response;
@@ -451,7 +360,6 @@ class MeliPayamak
             return false;
         }
     }
-
     public function getMessageByDate($location, $from, $index, $count, $dateFrom, $dateTo, $timeout = 0)
     {
         $this->connectForReceive($timeout);
@@ -463,7 +371,6 @@ class MeliPayamak
         $parameters['count'] = $count;
         $parameters['dateFrom'] = $dateFrom;
         $parameters['dateTo'] = $dateTo;
-
         try{
             $response = $this->client->GetMessagesByDate($parameters)->GetMessagesByDateResult;
             return $response;
@@ -471,14 +378,12 @@ class MeliPayamak
             return false;
         }
     }
-
     public function removeMessage($messageId, $timeout = 0)
     {
         $this->connectForReceive($timeout);
         $parameters['username'] = $this->confg['Username'];
         $parameters['password'] = $this->confg['Password'];
         $parameters['msgIds'] = $messageId;
-
         try{
             $response = $this->client->RemoveMessages($parameters)->RemoveMessagesResult;
             return $response;
