@@ -1,7 +1,7 @@
 <?php
 
 namespace Parsidev\MeliPayamak;
-ini_set('default_socket_timeout', 120);
+ini_set('default_socket_timeout', 5000);
 class MeliPayamak
 {
     protected $confg;
@@ -70,37 +70,86 @@ class MeliPayamak
     //Connect Start
     public function connectForSend($timeout)
     {
-        $this->client = new Soap($this->confg['SendUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
+        $this->client = new Soap($this->confg['SendUrl'], [
+            'trace' =>true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'keep_alive' => false,
+            'encoding' => 'UTF-8',
+            'timeout' => $timeout
+        ]);
     }
 
     public function connectForContact($timeout)
     {
-        $this->client = new Soap($this->confg['ContactUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
+        $this->client = new Soap($this->confg['ContactUrl'], [
+            'trace' =>true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'keep_alive' => false,
+            'encoding' => 'UTF-8',
+            'timeout' => $timeout
+        ]);
     }
 
     public function connectForReceive($timeout)
     {
-        $this->client = new Soap($this->confg['ReceiveUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
+        $this->client = new Soap($this->confg['ReceiveUrl'], [
+            'trace' =>true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'keep_alive' => false,
+            'encoding' => 'UTF-8',
+            'timeout' => $timeout
+        ]);
     }
 
     public function connectForTicket($timeout)
     {
-        $this->client = new Soap($this->confg['TicketUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
+        $this->client = new Soap($this->confg['TicketUrl'], [
+            'trace' =>true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'keep_alive' => false,
+            'encoding' => 'UTF-8',
+            'timeout' => $timeout
+        ]);
     }
 
     public function connectForUser($timeout)
     {
-        $this->client = new Soap($this->confg['UserUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
+        $this->client = new Soap($this->confg['UserUrl'], [
+            'trace' =>true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'keep_alive' => false,
+            'encoding' => 'UTF-8',
+            'timeout' => $timeout
+        ]);
     }
 
     public function connectForSchedule($timeout)
     {
-        $this->client = new Soap($this->confg['ScheduleUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
+        $this->client = new Soap($this->confg['ScheduleUrl'], [
+            'trace' =>true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'keep_alive' => false,
+            'encoding' => 'UTF-8',
+            'timeout' => $timeout
+        ]);
     }
 
     public function connectForRegional($timeout)
     {
-        $this->client = new Soap($this->confg['RegionalUrl'], ['encoding' => 'UTF-8', 'timeout' => $timeout]);
+        $this->client = new Soap($this->confg['RegionalUrl'], [
+            'trace' =>true,
+            'connection_timeout' => 5000,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'keep_alive' => false,
+            'encoding' => 'UTF-8',
+            'timeout' => $timeout
+        ]);
     }
     //Connect End
     //Send Start
