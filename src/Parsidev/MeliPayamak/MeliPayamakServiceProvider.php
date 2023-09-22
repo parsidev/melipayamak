@@ -4,9 +4,9 @@ use Illuminate\Support\ServiceProvider;
 class MeliPayamakServiceProvider extends ServiceProvider {
     protected $defer = true;
     public function boot() {
-        $this->publishes([
-            __DIR__ . '/../../config/melipayamak.php' => config_path('melipayamak.php'),
-        ]);
+        // $this->publishes([
+        //     __DIR__ . '/../../config/melipayamak.php' => config_path('melipayamak.php'),
+        // ]);
     }
     public function register() {
         // $this->app->singleton('melipayamak', function($app) {
