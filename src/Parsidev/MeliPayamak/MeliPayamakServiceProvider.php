@@ -9,10 +9,10 @@ class MeliPayamakServiceProvider extends ServiceProvider {
         ]);
     }
     public function register() {
-        $this->app->singleton('melipayamak', function($app) {
-            $config = config('melipayamak');
-            return new MeliPayamak($config);
-        });
+        // $this->app->singleton('melipayamak', function($app) {
+        //     $config = config('melipayamak');
+        //     return new MeliPayamak($config);
+        // });
     }
     public function provides() {
         return ['melipayamak'];
