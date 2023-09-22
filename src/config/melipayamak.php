@@ -7,7 +7,4 @@ return [
     'UserUrl' => 'http://api.payamak-panel.com/post/users.asmx?wsdl',
     'ScheduleUrl' => 'http://api.payamak-panel.com/post/Schedule.asmx?wsdl',
     'RegionalUrl' => 'http://api.payamak-panel.com/post/Actions.asmx?wsdl',
-    'Username' => '*****',
-    'Password' => '*********',
-    'fromNumber' => '*********',
 ];
